@@ -1,0 +1,6 @@
+---
+- name: Install docker on host
+  hosts: target
+  gather_facts: no
+  roles:
+    - role: docker_init

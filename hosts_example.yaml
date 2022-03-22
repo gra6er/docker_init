@@ -1,21 +1,21 @@
 all:
-  hosts:
+  children:
     target:
-      ansible_host: <db host IP or DNS>
-      ansible_user: <sudo user>
-      ansible_password: <sudo user's password>
-      ansible_become: yes
-      ansible_become_password: <sudo user's password>
+      hosts:
+        192.168.1.1: # <db host IP or DNS>
   
-  vars:
-  # DNF packages to prepare host  
-    dnf_packages:
-      - dnf-utils
-      - python3-pip
-      - unzip
-      - git
-      - docker-ce
+      vars:
+        ansible_user: <sudo user>
+        ansible_password: <sudo user's password>
+        ansible_become: yes
+        ansible_become_password: <sudo user's password>
+      # DNF packages to prepare host  
+        dnf_packages:
+          - dnf-utils
+          - python3-pip
+          - unzip
+          - docker-ce
 
-  # PIP packages to prepare host
-    pip_packages:
-      - docker-py
+      # PIP packages to prepare host
+        pip_packages:
+          - docker-py

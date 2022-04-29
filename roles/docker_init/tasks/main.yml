@@ -1,6 +1,7 @@
 ---
 # tasks file for docker_init
 
+# Change it to dnf module
 - name: Adding Docker repo
   ansible.builtin.command: dnf config-manager --add-repo=https://download.docker.com/linux/centos/docker-ce.repo
     
@@ -34,16 +35,17 @@
     groups: docker
     append: yes
 
-# Uncomment to copy custom docker daemon.json
 
-# - name: Copy service file for application
-#   ansible.builtin.copy:
-#     src: files/daemon.json
-#     dest: /etc/docker/daemon.json
-#     mode: 0644
+- name: Copy daemon.json file
+  ansible.builtin.copy:
+    src: files/daemon.json
+    dest: /etc/docker/daemon.json
+    mode: 0644
+  when: daemon_json_deploy
 
 - name: Start the Docker daemon
   ansible.builtin.systemd:
     name: docker
     state: restarted
+    daemon_reload: yes
     masked: no

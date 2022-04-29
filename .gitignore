@@ -1,2 +1,2 @@
-
+roles/docker_init/files/daemon.json
 hosts.yaml
